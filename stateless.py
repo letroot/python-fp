@@ -1,6 +1,19 @@
 """FP for president."""
 
 # Functional code avoids side effects
-# Functions do not rely on, or change, data outside their scope
+# Functions do not rely on, or change, data outside their scope.
 
 # imperative style that creates side effects freely
+text = "Twinkle twinkle"
+
+def annotate():
+    """Not a functional function"""
+    global text
+    text += " little star"
+
+annotate()
+print(text)
+
+# Rewrite functionally
+# def f_annotate():
+#     pass
