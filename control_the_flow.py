@@ -60,13 +60,13 @@ big_gen = (i for i in range(10000))
 # an algorithm, and more importantly get more at the “what” than the
 # “how” of a computation. 
 
-# Recursive procedures can spawn an iterative process
+# Recursive procedures can spawn an iterative process (Tail-recursive)
 # and hence would be no different that if you used a loop
 # For example, take the factorial
 
 def fact_iter(n):
     if n <= 1:
-        return n
+        return 1
     prd = 1
     while n:
         prd *= n
