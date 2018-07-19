@@ -62,7 +62,6 @@ print(names)
 # Map it
 # names_fp = ;
 
-from math import hypot
 lengths = [(3, 4), (5, 12), (6, 8), (1, 1)]
 hypots = []
 
@@ -76,5 +75,3 @@ print(hypots)
 
 # map-it
 # how?
-hypots_fp = map(lambda x,y: hypot(x,y), lengths)
-print(hypots)
