@@ -8,7 +8,6 @@ higher-order functions instead.
 import csv
 import random
 from functools import partial, reduce
-# Another example
 from math import hypot
 from operator import add, mul
 from pprint import pprint
@@ -40,6 +39,7 @@ def add5(number):
 # add_42 = make_adder(42)
 # print(add_42(1))
 
+# `functools.partial` can help with this too
 
 # lambdas
 
@@ -56,15 +56,16 @@ def add5(number):
 
 adjectives = ["Purple", "Gray", "Milky", "Jollof"]
 names = ["Apple", "Panther", "Raven", "Rock"]
+product_names = []
 
 # Iterate-mutate
-for idx, name in enumerate(names):
-    names[idx] = ' '.join((random.choice(adjectives), names[idx]))
+for name in names:
+    version_name = ' '.join((random.choice(adjectives), name))
+    product_names.append(version_name)
 
-print(names)
+# print(product_names)
 
 # Map it
-# names_fp = ;
 
 lengths = [(3, 4), (5, 12), (6, 8), (1, 1)]
 hypots = []
@@ -77,10 +78,10 @@ for a, b in lengths:
 # notice how this pattern updates a data-structure directly
 # and is explicit about 'how to do' it versus
 # describing 'what' is done
-print(hypots)
+# print(hypots)
 
-# map-it?
-
+# Map it
+# remember to unpack tuple
 
 
 # `reduce` takes a function and a colletion of items. It returns a value
@@ -95,7 +96,7 @@ xsum = 0
 for x in xs:
     xsum += x
 
-print(xsum)
+# print(xsum)
 
 # how reduce works:
 # reduce(FUNCTION WITH 2-ARITY, SEQUENCE, [OPTIONAL: INITIAL]
@@ -136,7 +137,7 @@ non_zero = lambda x: x > 0
 digits = [-1, -2, -3, 0, 1, 2, 3, 4, 5]
 
 filter_ls = filter(non_zero, digits)
-print(list(filter_ls))
+# print(list(filter_ls))
 
 
 # Exercise
@@ -150,8 +151,37 @@ def copy(dict_):
     d.update(dict_)
     return d
 
+# convert back to imperative to show diff
 def read_csv(path):
     with open(path) as csvfile:
         reader = csv.DictReader(csvfile)
         return [copy(row) for row in reader]
-pprint(read_csv("bmi.csv"))
+
+authors = read_csv("bmi.csv")
+
+# Calculate average Body Mass Index
+# BMI = weight / (height^2)
+
+bmi_total = 0
+author_count = 0
+
+for author in authors:
+    height = author['height']
+    weight = author['weight']
+    if height and weight:
+        author_bmi = float(weight) / (float(height)**2)
+        bmi_total += author_bmi
+        author_count += 1
+
+if author_count:
+    average_bmi = bmi_total / author_count
+
+    print("Average BMI", average_bmi)
+
+
+# Intermediary refactor
+# abstract the conditionals using _
+# generate bmis using _
+# sum / len
+
+# Final refactor
