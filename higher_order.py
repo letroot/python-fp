@@ -11,6 +11,7 @@ from functools import partial, reduce
 # Another example
 from math import hypot
 from operator import add, mul
+from pprint import pprint
 
 # What are higher-order functions?
 # Usual functions can:
@@ -144,7 +145,13 @@ print(list(filter_ls))
 # result to a variable on a separate line.
 # Once we have them functionally decomposed, we can then compress it further
 
+def copy(dict_):
+    d = {}
+    d.update(dict_)
+    return d
+
 def read_csv(path):
-    authors = []
-    with open(path) as csv_:
-        csv.DictReader
+    with open(path) as csvfile:
+        reader = csv.DictReader(csvfile)
+        return [copy(row) for row in reader]
+pprint(read_csv("bmi.csv"))
