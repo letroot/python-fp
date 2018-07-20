@@ -40,6 +40,8 @@ def add5(number):
 # print(add_42(1))
 
 # `functools.partial` can help with this too
+# def adder(num, inc):
+# 	return num + inc
 
 # lambdas
 

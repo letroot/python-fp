@@ -55,7 +55,54 @@ def signup():
 print(index.route)
 print(signup.route)
 
-# Exercise implement Flask routing in full
+# Exercise re-implement Flask routing in full
 # https://github.com/pallets/flask/blob/master/flask/app.py#L1124
 
 
+# Decorators can be used to cache results of
+# expensive computations - by memoizing
+
+def slow_fib(n):
+    """This is a very slow implementation
+    the fibonacci sequence because we are generating
+    a tree recursion, which means a lot of
+    redundant computations are happening.
+    """
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return slow_fib(n-1) + slow_fib(n-2)
+
+import time
+
+a = time.time()
+print(slow_fib(6))
+print("I took", time.time() - a)
+
+def cache(function):
+    cache = dict()
+    # note how we can read the function's arguments
+    # using a closure (in the inner scope)
+    def lookup(n):
+        if n not in cache:
+            cache[n] = function(n)
+        return cache[n]
+    return lookup
+
+@cache
+def not_so_slow_fib(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return slow_fib(n-1) + slow_fib(n-2)
+
+a = time.time()
+print(not_so_slow_fib(6))
+print("I took", time.time() - a)
+
+# Exercise
+# Why use `functools.wraps` instead?

@@ -23,7 +23,7 @@ print(ls_cmp)
 # {k:v for a, b in your_sequence}
 # {element for element in mixed_bag}
 
-# CAVEAT: if too deep, can reduce clarity.
+# CAVEAT: if too deep, can defeat clarity.
 
 ### Generator Expressions 
 # # Generator expressions are syntactically similar to list comprehensions
