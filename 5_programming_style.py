@@ -1,9 +1,9 @@
+"""Where we make the case for pipelined functions."""
 from copy import deepcopy
 from functools import reduce
 
 # The loop below performs transformations on dictionaries that hold the
 # state name in inconsistent formats and the incorrect zonal level (should be `State`)
-
 
 states = [{'state': 'Akwa-Ibom state', 'level': 'lga'},
           {'state': 'F.C.T', 'level': 'lga'},
@@ -19,6 +19,9 @@ def clean_states(states):
 
 clean_states(states)
 print(states)
+
+# We can rewrite each transformation as a function
+# 
 
 # NOTE `replace` and `capitalize` are functional, that is,
 # they return a new string instead of mutating the string
@@ -47,12 +50,10 @@ def transform_pipeline(states, funcs):
 # Then using reduce and map
 # reduce(lambda result, func: ...)
 
-# All three transformations boil down to making change to  particular
-# field on the passed state. `call()` can be used to abstract that.
-# It takes a function to apply and the key of the value to apply it to
-def call(key, func):
-    return 42
+# Exercise
+# All three transformation functions boil down to making change to  particular
+# field on the passed band. `call()` can be used to abstract that. It takes a
+# function to apply and the key of the value to apply it to
 
-_set_level_to_state = call(lambda x: 'Canada', 'country')
-_strip_hyphen_from_state = call(lambda x: x.replace('.', ''), 'name')
-_capitalize_states = call(str.title, 'name')
+# def call_on_key(key, fn):
+#     pass
